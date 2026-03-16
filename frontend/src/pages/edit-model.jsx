@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Save, RefreshCw } from "lucide-react";
+import API_URL from "../lib/api";
 
 export default function EditModel() {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function EditModel() {
   }, []);
 
   const fetchModels = () => {
-    axios.get("http://localhost:5000/model")
+    axios.get(`${API_URL}/model`)
       .then(res => {
         setModels(res.data);
         setLoading(false);
@@ -44,7 +45,7 @@ export default function EditModel() {
     }
 
     setSaving(true);
-    axios.post("http://localhost:5000/model", { updates: models })
+    axios.post(`${API_URL}/model`, { updates: models })
       .then(() => {
         setSaving(false);
         setErrorMSG("");

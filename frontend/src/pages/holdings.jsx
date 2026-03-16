@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatCurrency } from "../lib/formatters";
+import API_URL from "../lib/api";
 
 export default function Holdings() {
   const [holdings, setHoldings] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/holdings")
+    axios.get(`${API_URL}/holdings`)
       .then(res => {
         setHoldings(res.data);
         setLoading(false);

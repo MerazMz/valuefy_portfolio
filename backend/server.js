@@ -9,7 +9,9 @@ const historyRoute = require("./routes/history");
 
 const app = express();
 
-app.use(cors());
+// Allow all origins — Vercel frontend URL gets set via CORS_ORIGIN env var
+const corsOrigin = process.env.CORS_ORIGIN || "*";
+app.use(cors({ origin: corsOrigin }));
 app.use(express.json());
 
 app.use("/holdings", holdingsRoute);
@@ -18,7 +20,8 @@ app.use("/rebalance", rebalanceRoute);
 app.use("/save", saveRebalance);
 app.use("/history", historyRoute);
 
-const PORT = 5000;
+// Render injects PORT via environment variable
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

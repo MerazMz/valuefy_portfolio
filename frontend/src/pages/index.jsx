@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatCurrency } from "../lib/formatters";
 import { Save } from "lucide-react";
+import API_URL from "../lib/api";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -16,7 +17,7 @@ export default function Home() {
 
   const fetchRebalance = () => {
     setLoading(true);
-    axios.get("http://localhost:5000/rebalance")
+    axios.get(`${API_URL}/rebalance`)
       .then(res => {
         setData(res.data);
         setLoading(false);
@@ -53,7 +54,7 @@ export default function Home() {
       }))
     };
 
-    axios.post("http://localhost:5000/save", payload)
+    axios.post(`${API_URL}/save`, payload)
       .then(() => {
         setSuccessMSG("Recommendation saved successfully!");
         setSaving(false);

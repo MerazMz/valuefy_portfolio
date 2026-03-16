@@ -1,5 +1,6 @@
 const Database = require("better-sqlite3");
+const path = require("path");
 
-const db = new Database("../model_portfolio.db");
+const db = new Database(path.join(__dirname, "..", "model_portfolio.db"));
 
 module.exports = db;

@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { formatCurrency, formatDate } from "../lib/formatters";
+import API_URL from "../lib/api";
 
 export default function History() {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/history")
+    axios.get(`${API_URL}/history`)
       .then(res => {
         setHistory(res.data);
         setLoading(false);
